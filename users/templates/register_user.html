@@ -1,0 +1,45 @@
+{% extends "base_email.html" %}
+{% block container %}
+<div >
+<div  style="width: 100%; max-width: 560px;">
+	<table border="0" cellpadding="0" cellspacing="0" align="center"  style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; width: 100%;">
+		<tr><td align="center"><h2>REGISTRO DE NUEVO USUARIO</h2></td></tr>
+        <tr>
+			<td  style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;">
+				<br>
+				<div  style="padding: 26px; box-shadow: 0 1px 1px rgba(0,0,0,.12),0 1px 1px rgba(0,0,0,.24); margin-bottom: 30px; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; background: #FFF; overflow: hidden;">
+					<p>Hola, <b>{{ fullname }}</b>:</p>
+                    <p>Se ha creado una cuenta de usuario, para el sistema de monitoreo <a href="{{ hostname }}">{{ hostname }}</a></p>
+					<p>
+                        {% if is_superuser %}
+                            Su cuenta de tipo <b>Administrador</b> esta asociada al correo electrónico {{ email }}, usted podra ingresar al sistema de monitoreo con los siguientes datos:
+                        {% else %}
+                            Su cuenta de usuario esta asociada al correo electrónico {{ email }}, usted podra ingresar al sistema de monitoreo con los siguientes datos:
+                        {% endif %}
+                    </p>
+                    <p>
+                        <span>Nombre de usuario: <b>{{ username }}</b></span><br>
+                        <span>Constraseña: <b>{{ username }}</b></span>
+                    </p>
+                    <p>Por favor, vaya a la siguiente página para <a href="{{ hostname }}/auth/login">Ingresar al sistema</a>; y le recomendamos cambiar su contraseña por seguridad.</p>
+                    <small>Proceso realizado el: <i>{{ created_at }}</i></small>
+                </div>
+                {% if not is_active %}
+                    <div style="background:rgba(255, 143, 143, 0.15); padding:5px 26px 15px; box-shadow: 0 1px 1px rgba(0,0,0,.12),0 1px 1px rgba(0,0,0,.24); margin-bottom: 30px; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; overflow: hidden;">
+                        <h2>Advertencia</h2>
+                        <small>Su cuenta de usuarios ha sido creada, pero se encuentra inhabilitada, comunicarse con el administrador del sistema y solicitar que habilite su cuenta de usuario</small>
+                    </div>
+                {% endif %}
+			</td>
+		</tr>
+		<tr>
+            <td  align="center" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;"></td>
+		</tr>
+	</table>
+</div>
+</div>
+{% endblock container %}
+
+{% block footer %}
+	{% include 'footer_email.html' %}
+{% endblock footer %}
